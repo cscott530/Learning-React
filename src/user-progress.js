@@ -1,13 +1,55 @@
 var UserProgress = React.createClass({
+	getInitialState: function() {
+		return {
+			loading: true,
+			users: []
+		};
+	},
+	loadUsersFromServer: function() {
+		//e.g.
+		setTimeout(function() {
+			this.setState({
+				loading: false,
+				users: [
+					{
+						name: 'Chris',
+						progress: [
+							{
+								name: 'Cert 1',
+								progress: '85'
+							},
+							{
+								name: 'Cert 2',
+								progress: '75'
+							}
+						]
+					},
+					{
+						name: 'Second User',
+						progress: []
+					}
+				]
+			});
+		}.bind(this), 1000);
+	},
+	componentDidMount: function() {
+		this.loadUsersFromServer();
+	},
 	render: function() {
-
+		var content = '';
+		if (this.state.loading) {
+			content = (<LoadingGif />);
+		} else {
+			content = (<UserRecordsList users={this.state.users} />);
+		}
 		return (
 			<div className="userProgress commonWidget">
 				<WidgetHeader title="User Progress" />
-				<UserRecordsList users={this.props.users} />
+				{content}
 			</div>
 		);
-	}
+	},
+
 });
 
 var WidgetHeader = React.createClass({
@@ -71,23 +113,14 @@ var UserProgressChart = React.createClass({
 	}
 });
 
-var users = [
-	{
-		name: 'Chris',
-		progress: [
-			{
-				name: 'Cert 1',
-				progress: '85'
-			},
-			{
-				name: 'Cert 2',
-				progress: '75'
-			}
-		]
-	},
-	{
-		name: 'Second User',
-		progress: []
+var LoadingGif = React.createClass({
+	render: function() {
+		return (
+			<div>
+				<img src="http://www.ajaxload.info/cache/FF/FF/FF/00/00/00/19-0.gif" />	
+			</div>
+		)
 	}
-];
-React.render(<UserProgress users={users}/>, $('#content')[0]);
+})
+
+React.render(<UserProgress />, $('#content')[0]);

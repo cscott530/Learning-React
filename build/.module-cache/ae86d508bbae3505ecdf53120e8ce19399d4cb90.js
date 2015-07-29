@@ -1,7 +1,6 @@
 var UserProgress = React.createClass({displayName: "UserProgress",
 	getInitialState: function() {
 		return {
-			loading: true,
 			users: []
 		};
 	},
@@ -117,7 +116,7 @@ var LoadingGif = React.createClass({displayName: "LoadingGif",
 	render: function() {
 		return (
 			React.createElement("div", null, 
-				React.createElement("img", {src: "http://www.ajaxload.info/cache/FF/FF/FF/00/00/00/19-0.gif"})	
+				React.createElement("img", {src: "http://www.ajaxload.info/cache/FF/FF/FF/00/00/00/1-0.gif"})	
 			)
 		)
 	}

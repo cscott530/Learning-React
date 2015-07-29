@@ -1,51 +1,29 @@
 var UserProgress = React.createClass({displayName: "UserProgress",
 	getInitialState: function() {
 		return {
-			loading: true,
 			users: []
 		};
 	},
-	loadUsersFromServer: function() {
-		//e.g.
+	loadCommentsFromServer: function() {
 		setTimeout(function() {
 			this.setState({
-				loading: false,
-				users: [
-					{
-						name: 'Chris',
-						progress: [
-							{
-								name: 'Cert 1',
-								progress: '85'
-							},
-							{
-								name: 'Cert 2',
-								progress: '75'
-							}
-						]
-					},
-					{
-						name: 'Second User',
-						progress: []
-					}
+				data: [
+					{author: 'Chris Scott', content: 'This is the **first** comment'},
+					{author: 'M T', content: 'Second'}
 				]
 			});
 		}.bind(this), 1000);
 	},
 	componentDidMount: function() {
-		this.loadUsersFromServer();
+		this.loadCommentsFromServer();
+		//setInterval(this.loadCommentsFromServer, this.props.pollInterval);
 	},
 	render: function() {
-		var content = '';
-		if (this.state.loading) {
-			content = (React.createElement(LoadingGif, null));
-		} else {
-			content = (React.createElement(UserRecordsList, {users: this.state.users}));
-		}
+
 		return (
 			React.createElement("div", {className: "userProgress commonWidget"}, 
 				React.createElement(WidgetHeader, {title: "User Progress"}), 
-				content
+				React.createElement(UserRecordsList, {users: this.props.users})
 			)
 		);
 	},
@@ -113,14 +91,23 @@ var UserProgressChart = React.createClass({displayName: "UserProgressChart",
 	}
 });
 
-var LoadingGif = React.createClass({displayName: "LoadingGif",
-	render: function() {
-		return (
-			React.createElement("div", null, 
-				React.createElement("img", {src: "http://www.ajaxload.info/cache/FF/FF/FF/00/00/00/19-0.gif"})	
-			)
-		)
+var users = [
+	{
+		name: 'Chris',
+		progress: [
+			{
+				name: 'Cert 1',
+				progress: '85'
+			},
+			{
+				name: 'Cert 2',
+				progress: '75'
+			}
+		]
+	},
+	{
+		name: 'Second User',
+		progress: []
 	}
-})
-
-React.render(React.createElement(UserProgress, null), $('#content')[0]);
+];
+React.render(React.createElement(UserProgress, {users: users}), $('#content')[0]);

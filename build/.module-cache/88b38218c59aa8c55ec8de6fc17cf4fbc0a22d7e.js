@@ -1,7 +1,6 @@
 var UserProgress = React.createClass({displayName: "UserProgress",
 	getInitialState: function() {
 		return {
-			loading: true,
 			users: []
 		};
 	},
@@ -9,8 +8,7 @@ var UserProgress = React.createClass({displayName: "UserProgress",
 		//e.g.
 		setTimeout(function() {
 			this.setState({
-				loading: false,
-				users: [
+				data: [
 					{
 						name: 'Chris',
 						progress: [
@@ -38,14 +36,14 @@ var UserProgress = React.createClass({displayName: "UserProgress",
 	render: function() {
 		var content = '';
 		if (this.state.loading) {
-			content = (React.createElement(LoadingGif, null));
+
 		} else {
-			content = (React.createElement(UserRecordsList, {users: this.state.users}));
+
 		}
 		return (
 			React.createElement("div", {className: "userProgress commonWidget"}, 
 				React.createElement(WidgetHeader, {title: "User Progress"}), 
-				content
+				React.createElement(UserRecordsList, {users: this.state.users})
 			)
 		);
 	},
@@ -116,9 +114,7 @@ var UserProgressChart = React.createClass({displayName: "UserProgressChart",
 var LoadingGif = React.createClass({displayName: "LoadingGif",
 	render: function() {
 		return (
-			React.createElement("div", null, 
-				React.createElement("img", {src: "http://www.ajaxload.info/cache/FF/FF/FF/00/00/00/19-0.gif"})	
-			)
+			React.createElement("img", {src: "http://www.ajaxload.info/cache/FF/FF/FF/00/00/00/1-0.gif"})	
 		)
 	}
 })
