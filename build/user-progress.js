@@ -85,11 +85,20 @@ var UserRecord = React.createClass({displayName: "UserRecord",
 		}
 		return (
 			React.createElement("div", {className: "userRecord"}, 
+				React.createElement(StatusBar, null), 
 				React.createElement("span", {className: "userName"}, this.props.user.name), 
 				React.createElement("div", {className: "progressCharts"}, 
 					 userProgressCharts 
 				)
 			)
+		);
+	}
+});
+
+var StatusBar = React.createClass({displayName: "StatusBar",
+	render: function() {
+		return (
+			React.createElement("div", {className: "statusBar"})
 		);
 	}
 });

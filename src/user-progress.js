@@ -85,11 +85,20 @@ var UserRecord = React.createClass({
 		}
 		return (
 			<div className="userRecord">
+				<StatusBar />
 				<span className="userName">{this.props.user.name}</span>
 				<div className="progressCharts">
 					{ userProgressCharts }
 				</div>
 			</div>
+		);
+	}
+});
+
+var StatusBar = React.createClass({
+	render: function() {
+		return (
+			<div className="statusBar" />
 		);
 	}
 });
